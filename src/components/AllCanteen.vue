@@ -31,8 +31,6 @@
 import ECharts from 'vue-echarts/components/ECharts'
 import 'echarts/lib/chart/pie'
 // import 'echarts-liquidfill'
-// data
-// import pie from '../data/pie'
 // theme
 import 'echarts/theme/dark'
 import theme from '../theme.json'
