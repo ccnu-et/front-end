@@ -68,9 +68,7 @@ export default {
   },
   mounted () {
     let pieDataIndex = -1
-    let barDataIndex = -1
     let pieDataLen = 10
-    let barDataLen = 6
     var Pie = this.$refs.Pie
     var Bar = this.$refs.Bar
 
@@ -88,7 +86,6 @@ export default {
         dataIndex: pieDataIndex,
       })
       pieDataIndex = (pieDataIndex + 1) % pieDataLen
-      barDataIndex = (barDataIndex + 1) % barDataLen
       Pie.dispatchAction({
         type: 'highlight',
         seriesIndex: 0,
@@ -98,11 +95,6 @@ export default {
         type: 'showTip',
         seriesIndex: 0,
         dataIndex: pieDataIndex
-      })
-      Bar.dispatchAction({
-        type: 'showTip',
-        seriesIndex: 0,
-        dataIndex: barDataIndex
       })
     }, 1000)
   }

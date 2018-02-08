@@ -33,7 +33,7 @@ const state = {
         axisType: 'category',
         show: true,
         autoPlay: true,
-        playInterval: 5000,
+        playInterval: 2500,
         data: ['早', '中', '晚']
       },
       tooltip: {},
