@@ -1,9 +1,5 @@
 const state = {
   pie: {
-    title: {
-     text: '可怜的沁园春...',
-     x: 'center'
-    },
     tooltip: {
       trigger: 'item',
       formatter: '{a} <br/>{b} : {c} ({d}%)'
@@ -29,6 +25,39 @@ const state = {
         }
       }
     ]
+  },
+  bar: {
+    baseOption: {
+      timeline: {
+        loop: true,
+        axisType: 'category',
+        show: true,
+        autoPlay: true,
+        playInterval: 5000,
+        data: ['早', '中', '晚']
+      },
+      tooltip: {},
+      legend: {
+        data: ['刷卡量']
+      },
+      xAxis: {
+        data: []
+      },
+      yAxis: {
+        axisLabel: {show: true}
+      },
+      series: [{
+        type: 'bar',
+        name: '刷卡量',
+        itemStyle: {
+          normal: {
+            color: "red"
+          }
+        },
+        data: []
+      }]
+    },
+    options: []
   }
 }
 
