@@ -7,6 +7,8 @@ window.router = router
 import store from './store'
 window.store = store
 
+require('./assets/style.styl')
+
 Vue.config.devtools = true
 Vue.config.productionTip = false
 
