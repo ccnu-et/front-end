@@ -75,19 +75,26 @@ export default {
     }
   },
   mounted () {
-    let pieDataIndex = -1
-    let pieDataLen = 10
     var Pie = this.$refs.Pie
     var Bar = this.$refs.Bar
     var Scatter = this.$refs.Scatter
 
-    Pie.showLoading()
+    let pieDataIndex = -1
+    let pieDataLen = 10
+
+    Pie.showLoading({
+      text: "数据实时处理中.."
+    })
     this.$store.dispatch('getPieData', Pie)
     // Pie.hideLoading()
-    Bar.showLoading()
+    Bar.showLoading({
+      text: "数据实时处理中.."
+    })
     this.$store.dispatch('getBarData', Bar)
     // Bar.hideLoading() 
-    Scatter.showLoading()
+    Scatter.showLoading({
+      text: "数据实时处理中.."
+    })
     this.$store.dispatch('getScatterData', Scatter)
     // Scatter.hideLoading()
 
@@ -95,7 +102,7 @@ export default {
       Pie.dispatchAction({
         type: 'downplay',
         seriesIndex: 0,
-        dataIndex: pieDataIndex,
+        dataIndex: pieDataIndex
       })
       pieDataIndex = (pieDataIndex + 1) % pieDataLen
       Pie.dispatchAction({

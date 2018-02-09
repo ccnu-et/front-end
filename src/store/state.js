@@ -90,7 +90,7 @@ const state = {
       formatter : function (params) {
         if (params.value.length > 1) {
           return params.data[2] + ' :<br/>'
-            + params.value[0] + '元 '
+            + params.value[0] + '元; '
             + params.value[1] + '元 ';
         }
         else {
@@ -160,23 +160,6 @@ const state = {
         data: [],
         type: 'scatter',
         symbolSize: 40,
-        label: {
-          emphasis: {
-            show: true,
-            formatter: function (param) {
-                return param.data[2];
-            },
-            position: 'top',
-            rich: {
-             gray: {
-                 color: 'gray'
-             },
-             green: {
-                 color: 'green'
-             }
-            }
-          }
-        },
         itemStyle: {
           normal: {
             shadowBlur: 10,
@@ -191,15 +174,6 @@ const state = {
         data: [],
         type: 'scatter',
         symbolSize: 40,
-        label: {
-          emphasis: {
-            show: true,
-            formatter: function (param) {
-                return param.data[2];
-            },
-            position: 'top'
-          },
-        },
         itemStyle: {
           normal: {
             shadowBlur: 10,
