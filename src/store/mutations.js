@@ -51,3 +51,10 @@ export const Update_Bar = (state, data) => {
   state.bar.options.push(tll)
   state.bar.options.push(tld)
 }
+
+
+export const Update_Scatter = (state, data) => {
+  state.scatter['series'][0]['markLine']['data'][0]['yAxis'] = data['avg']
+  state.scatter['series'][1]['data'] = data['low']
+  state.scatter['series'][2]['data'] = data['high']
+}

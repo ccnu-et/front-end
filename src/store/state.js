@@ -1,5 +1,13 @@
 const state = {
   pie: {
+    toolbox:{
+      right:20,
+      top: 30,
+      feature:{
+      	saveAsImage: {},
+      	restore: {},
+      }
+	},
     tooltip: {
       trigger: 'item',
       formatter: '{a} <br/>{b} : {c} ({d}%)'
@@ -28,6 +36,14 @@ const state = {
   },
   bar: {
     baseOption: {
+      toolbox:{
+        right: 20,
+        top: 30,
+        feature:{
+          saveAsImage: {},
+          restore: {},
+        }
+      },
       timeline: {
         loop: true,
         axisType: 'category',
@@ -58,6 +74,142 @@ const state = {
       }]
     },
     options: []
+  },
+  scatter: {
+    toolbox:{
+      right:20,
+      top: 30,
+      feature:{
+      	saveAsImage: {},
+      	restore: {},
+      }
+	},
+    tooltip : {
+      trigger: 'item',
+      showDelay : 0,
+      formatter : function (params) {
+        if (params.value.length > 1) {
+          return params.data[2] + ' :<br/>'
+            + params.value[0] + '元 '
+            + params.value[1] + '元 ';
+        }
+        else {
+          return params.seriesName
+        }
+      },
+      axisPointer:{
+        show: true,
+        type : 'cross',
+        lineStyle: {
+          type : 'solid',
+          width : 1
+        },
+	    label:{
+	      fontSize: 12,
+	      formatter: function(params) {
+	        return params.value.toFixed(2);
+	   	  }
+	    }
+      }
+    },
+    legend: {
+      right: 10,
+      data: ['低于平均', '高于平均']
+    },
+    xAxis: {
+      name: "最高消费",
+      splitLine: {
+        lineStyle: {
+          type: 'dashed'
+        }
+      }
+    },
+    yAxis: {
+      name: "平均消费",
+      splitLine: {
+        lineStyle: {
+          type: 'dashed'
+        }
+      },
+      scale: true
+    },
+    series: [
+      {
+        type: 'line',
+        markLine: {
+          symbol: 'none',
+          data: [{
+            yAxis: 0,
+            valueIndex: 1,
+            lineStyle: {
+              normal: {
+                color: 'green',
+                type: 'dashed'
+              }
+            },
+            label: {
+              normal: {
+                show: true
+              }
+            }
+          }]
+        },
+      },
+      {
+        name: '低于平均',
+        data: [],
+        type: 'scatter',
+        symbolSize: 40,
+        label: {
+          emphasis: {
+            show: true,
+            formatter: function (param) {
+                return param.data[2];
+            },
+            position: 'top',
+            rich: {
+             gray: {
+                 color: 'gray'
+             },
+             green: {
+                 color: 'green'
+             }
+            }
+          }
+        },
+        itemStyle: {
+          normal: {
+            shadowBlur: 10,
+            shadowColor: 'rgba(120, 36, 50, 0.5)',
+            shadowOffsetY: 5,
+            color: 'rgb(251, 118, 123)'
+          }
+        }
+      },
+      {
+        name: '高于平均',
+        data: [],
+        type: 'scatter',
+        symbolSize: 40,
+        label: {
+          emphasis: {
+            show: true,
+            formatter: function (param) {
+                return param.data[2];
+            },
+            position: 'top'
+          },
+        },
+        itemStyle: {
+          normal: {
+            shadowBlur: 10,
+            shadowColor: 'rgba(25, 100, 150, 0.5)',
+            shadowOffsetY: 5,
+            color: 'rgb(129, 227, 238)'
+          }
+        }
+      }
+    ] 
   }
 }
 

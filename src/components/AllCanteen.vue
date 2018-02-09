@@ -1,11 +1,5 @@
 <template>
   <main>
-    <!-- <chart 
-      id="logo"
-      :options="logo"
-      :init-options="initOptions"
-      auto-resize
-    /> -->
     <h1><a href="">华中师范大学食堂数据分析(test)</a></h1>
     <p class="desc">2017年2014, 2015, 2016级884579条消费记录</p>
 
@@ -19,7 +13,7 @@
       />
     </figure>
 
-    <h2 id="bar"><a href="">刷卡最多的食堂窗口<small>(取前六名)</small></a></h2>
+    <h2 id="bar"><a href="">华师刷卡最多的食堂窗口<small>(取前六名)</small></a></h2>
     <figure>
       <chart 
         :options="bar"
@@ -30,6 +24,17 @@
       />
     </figure>
     
+    <h2 id="scatter"><a href="">华师各食堂平均消费金额<small>(人民币)</small></a></h2>
+    <figure>
+      <chart
+       :options="scatter"
+       :init-options="initOptions"
+       ref="Scatter"
+       theme="ovilia-green"
+       auto-resize
+      />
+    </figure>
+
     <footer>
       <a href="//github.com/misakar">@misakar</a>|<a
           href="http://www.wtfpl.net/">WTFPL License</a>|<a href="https://github.com/ccnu-et/front-end/">View on GitHub</a>
@@ -42,6 +47,7 @@
 import ECharts from 'vue-echarts/components/ECharts'
 import 'echarts/lib/chart/pie'
 import 'echarts/lib/chart/bar'
+import 'echarts/lib/chart/scatter'
 // import 'echarts-liquidfill'
 // theme
 import 'echarts/theme/dark'
@@ -57,10 +63,12 @@ export default {
     let options = 'svg'
     let pie = this.$store.getters.pie
     let bar = this.$store.getters.bar
+    let scatter = this.$store.getters.scatter
     return {
       options,
       pie,
       bar,
+      scatter,
       initOptions: {
         renderer: options.renderer
       }
@@ -71,13 +79,17 @@ export default {
     let pieDataLen = 10
     var Pie = this.$refs.Pie
     var Bar = this.$refs.Bar
+    var Scatter = this.$refs.Scatter
 
     Pie.showLoading()
     this.$store.dispatch('getPieData', Pie)
     // Pie.hideLoading()
     Bar.showLoading()
     this.$store.dispatch('getBarData', Bar)
-    // Bar.hideLoading()
+    // Bar.hideLoading() 
+    Scatter.showLoading()
+    this.$store.dispatch('getScatterData', Scatter)
+    // Scatter.hideLoading()
 
     setInterval(() => {
       Pie.dispatchAction({
