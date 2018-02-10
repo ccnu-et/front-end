@@ -13,6 +13,16 @@
       />
     </figure>
 
+    <h2 id="line"><a href="">华师主要食堂每日刷卡量<small>(对比)</small></a></h2>
+    <figure>
+      <chart
+        :options="line"
+        :init-options="initOptions"
+        ref="Line"
+        auto-resize
+      />
+    </figure>
+
     <h2 id="bar"><a href="">华师刷卡最多的食堂窗口<small>(取前六名)</small></a></h2>
     <figure>
       <chart 
@@ -28,7 +38,6 @@
     <figure>
       <chart
        :options="scatter"
-       :init-options="initOptions"
        ref="Scatter"
        theme="ovilia-green"
        auto-resize
@@ -48,6 +57,7 @@ import ECharts from 'vue-echarts/components/ECharts'
 import 'echarts/lib/chart/pie'
 import 'echarts/lib/chart/bar'
 import 'echarts/lib/chart/scatter'
+import 'echarts/lib/chart/line'
 // import 'echarts-liquidfill'
 // theme
 import 'echarts/theme/dark'
@@ -62,20 +72,23 @@ export default {
   data () {
     let options = 'svg'
     let pie = this.$store.getters.pie
+    let line = this.$store.getters.line
     let bar = this.$store.getters.bar
     let scatter = this.$store.getters.scatter
     return {
       options,
       pie,
+      line,
       bar,
       scatter,
       initOptions: {
-        renderer: options.renderer
+        renderer: options.renderer || 'svg'
       }
     }
   },
   mounted () {
     var Pie = this.$refs.Pie
+    var Line = this.$refs.Line
     var Bar = this.$refs.Bar
     var Scatter = this.$refs.Scatter
 
@@ -87,6 +100,11 @@ export default {
     })
     this.$store.dispatch('getPieData', Pie)
     // Pie.hideLoading()
+    Line.showLoading({
+      text: "数据实时处理中.."
+    })
+    this.$store.dispatch('getLineData', Line)
+    // Line.hideLoading()
     Bar.showLoading({
       text: "数据实时处理中.."
     })

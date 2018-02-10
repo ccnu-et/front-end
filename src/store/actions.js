@@ -10,6 +10,16 @@ export const getPieData = ({ commit }, Pie) => {
   })
 }
 
+export const getLineData = ({ commit }, Line) => {
+  var headers = {
+    'Content-Type': 'application/json'
+  }
+  return http.get('/day_canteen/', headers).then((res) => {
+    commit('Update_Line', res.data)
+    Line.hideLoading()
+  })
+}
+
 export const getBarData = ({ commit }, Bar) => {
   var headers = {
     'Content-Type': 'application/json'

@@ -3,6 +3,10 @@ export const Update_Pie = (state, data) => {
   state.pie['legend']['data'] = data['legend']
 }
 
+export const Update_Line = (state, data) => {
+  state.line['series'] = data
+}
+
 export const Update_Bar = (state, data) => {
   // xAxis: 食堂窗口
   let tlb = {

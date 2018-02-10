@@ -10,7 +10,6 @@ const state = {
 	},
     tooltip: {
       trigger: 'item',
-      formatter: '{a} <br/>{b} : {c} ({d}%)'
     },
     legend: {
       orient: 'vertical',
@@ -33,6 +32,37 @@ const state = {
         }
       }
     ]
+  },
+  line: {
+    tooltip: {
+      trigger: 'axis',
+    },
+    legend: {
+      data:[]
+    },
+    grid: {
+      left: '3%',
+      right: '4%',
+      bottom: '3%',
+      containLabel: true
+    },
+    toolbox: {
+      right:20,
+      top: 30,
+      feature: {
+        saveAsImage: {},
+        restore: {}
+      }
+    },
+    xAxis: {
+      type: 'category',
+      boundaryGap: false,
+      data: ['周一','周二','周三','周四','周五','周六','周日']
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: []
   },
   bar: {
     baseOption: {
@@ -67,7 +97,7 @@ const state = {
         name: '刷卡量',
         itemStyle: {
           normal: {
-            color: "red"
+            color: "red",
           }
         },
         data: []
