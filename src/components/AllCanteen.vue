@@ -1,7 +1,8 @@
 <template>
   <main>
+    <navbar></navbar>
     <h1><a href="">华中师范大学食堂数据分析(test)</a></h1>
-    <p class="desc">2017年2014, 2015, 2016级884579条消费记录</p>
+    <p class="desc">2017年2014, 2015, 2016级 {{ dataLen }} 条消费记录</p>
 
     <h2 id="pie"><a href="">华师各食堂消费占比<small>(2017年)</small></a></h2>
     <figure>
@@ -46,19 +47,20 @@
 
     <footer>
       <a href="//github.com/misakar">@misakar</a>|<a
-          href="http://www.wtfpl.net/">WTFPL License</a>|<a href="https://github.com/ccnu-et/front-end/">View on GitHub</a>
+          href="http://www.wtfpl.net/">WTFPL License</a>|<a href="https://github.com/ccnu-et/front-end/">View on GitHub</a><br/>
     </footer>
 
   </main>
 </template>
 
 <script>
+// components
 import ECharts from 'vue-echarts/components/ECharts'
 import 'echarts/lib/chart/pie'
 import 'echarts/lib/chart/bar'
 import 'echarts/lib/chart/scatter'
 import 'echarts/lib/chart/line'
-// import 'echarts-liquidfill'
+import NavBar from './NavBar'
 // theme
 import 'echarts/theme/dark'
 import theme from '../theme.json'
@@ -67,15 +69,18 @@ ECharts.registerTheme('ovilia-green', theme)
 export default {
   name: 'AllCanteen',
   components: {
-    chart: ECharts
+    chart: ECharts,
+    navbar: NavBar
   },
   data () {
+    let dataLen = this.$store.getters.dataLen
     let options = 'svg'
     let pie = this.$store.getters.pie
     let line = this.$store.getters.line
     let bar = this.$store.getters.bar
     let scatter = this.$store.getters.scatter
     return {
+      dataLen,
       options,
       pie,
       line,
@@ -95,26 +100,30 @@ export default {
     let pieDataIndex = -1
     let pieDataLen = 10
 
+    // this.$store.dispatch('getDataLen')
     Pie.showLoading({
       text: "数据实时处理中.."
     })
     this.$store.dispatch('getPieData', Pie)
     // Pie.hideLoading()
+
     Line.showLoading({
       text: "数据实时处理中.."
     })
     this.$store.dispatch('getLineData', Line)
     // Line.hideLoading()
-    Bar.showLoading({
-      text: "数据实时处理中.."
-    })
-    this.$store.dispatch('getBarData', Bar)
-    // Bar.hideLoading() 
+
     Scatter.showLoading({
       text: "数据实时处理中.."
     })
     this.$store.dispatch('getScatterData', Scatter)
     // Scatter.hideLoading()
+
+    Bar.showLoading({
+      text: "数据实时处理中.."
+    })
+    this.$store.dispatch('getBarData', Bar)
+    // Bar.hideLoading() 
 
     setInterval(() => {
       Pie.dispatchAction({

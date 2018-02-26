@@ -1,3 +1,7 @@
+export const Update_Data = (state, data) => {
+  state.dataLen = data['meta']['data_len']
+}
+
 export const Update_Pie = (state, data) => {
   state.pie['series'][0]['data'] = data['data']
   state.pie['legend']['data'] = data['legend']
@@ -61,4 +65,16 @@ export const Update_Scatter = (state, data) => {
   state.scatter['series'][0]['markLine']['data'][0]['yAxis'] = data['avg']
   state.scatter['series'][1]['data'] = data['low']
   state.scatter['series'][2]['data'] = data['high']
+}
+
+export const Update_Food = (state, data) => {
+  state.recommends = data
+}
+
+export const Clean_LastRe = (state) => {
+  state.recommends = {
+    breakfast: {head: '', recommends: [] },
+    lunch: {head: '', recommends: [] },
+    dinner: {head: '', recommends: [] },
+  }
 }

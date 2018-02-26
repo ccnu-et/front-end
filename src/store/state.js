@@ -1,4 +1,5 @@
 const state = {
+  dataLen: 884515,
   pie: {
     toolbox:{
       right:20,
@@ -214,6 +215,11 @@ const state = {
         }
       }
     ] 
+  },
+  recommends: {
+    breakfast: {head: '', recommends: [] },
+    lunch: {head: '', recommends: [] },
+    dinner: {head: '', recommends: [] },
   }
 }
 
