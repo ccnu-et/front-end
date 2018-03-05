@@ -1,17 +1,22 @@
 <template>
   <div class="main">
   <navbar></navbar>
-  <h1>个人食堂窗口推荐</h1>
 
+  <h1><a href="">华中师范大学个人消费数据分析(test)</a></h1>
     <sui-form>
       <sui-form-field>
         <input id="sid" v-model="sid" placeholder="请输入学号">
       </sui-form-field>
       <button type="submit" @click.prevent="getRecommends"
-          style="font-size:15px;">获取推荐</button>
+          style="font-size:15px;">查询</button>
     </sui-form>
 
-    <h2>{{ breakfast.head }}</h2>
+  <figure>
+    <h1 id=""><a href="">个人食堂消费报告<small>(2017年)</small></a></h1>
+    <h3 class="desc">{{ info }}</h3>
+    <div v-html="report"></div>
+
+    <div v-html="breakfast.head"></div>
     <sui-card-group :items-per-row="3">
       <sui-card v-model="breakfast"
                 v-for="food in breakfast.recommends"
@@ -22,13 +27,15 @@
             <sui-card-meta>{{ food.canteen }}</sui-card-meta>
         </sui-card-content>
         <sui-card-content extra>
-          Rating: <sui-rating icon="star" :max-rating="4" :rating="food.star"/>
-          <sui-icon name="likes" />1000
+            消费量: <sui-icon name="likes" /> {{ food.value }}
+        </sui-card-content>
+        <sui-card-content extra>
+          推荐度: <sui-rating icon="star" :max-rating="4" :rating="food.star"/>
         </sui-card-content>
       </sui-card>
     </sui-card-group>
 
-    <h2>{{ lunch.head }}</h2>
+    <div v-html="lunch.head"></div>
     <sui-card-group :items-per-row="3">
       <sui-card v-model="lunch"
                 v-for="food in lunch.recommends"
@@ -39,13 +46,15 @@
             <sui-card-meta>{{ food.canteen }}</sui-card-meta>
         </sui-card-content>
         <sui-card-content extra>
-          Rating: <sui-rating icon="star" :max-rating="4" :rating="food.star"/>
-          <sui-icon name="likes" />1000
+            消费量: <sui-icon name="likes" />{{ food.value }}
+        </sui-card-content>
+        <sui-card-content extra>
+          推荐度: <sui-rating icon="star" :max-rating="4" :rating="food.star"/>
         </sui-card-content>
       </sui-card>
     </sui-card-group>
 
-    <h2>{{ dinner.head }}</h2>
+    <div v-html="dinner.head"></div>
     <sui-card-group :items-per-row="3">
       <sui-card v-model="dinner"
                 v-for="food in dinner.recommends"
@@ -56,30 +65,42 @@
             <sui-card-meta>{{ food.canteen }}</sui-card-meta>
         </sui-card-content>
         <sui-card-content extra>
-          Rating: <sui-rating icon="star" :max-rating="4" :rating="food.star"/>
-          <sui-icon name="likes" />1000
+            消费量: <sui-icon name="likes" />{{ food.value }}
+        </sui-card-content>
+        <sui-card-content extra>
+          推荐度: <sui-rating icon="star" :max-rating="4" :rating="food.star"/>
         </sui-card-content>
       </sui-card>
     </sui-card-group>
+  </figure>
+
+    <foot></foot>
   </div>
 </template>
 
 <script>
 import 'semantic-ui-css/semantic.min.css'
 import NavBar from './NavBar'
+import Footer from './Footer'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'StuCanteen',
   components: {
-    navbar: NavBar
+    navbar: NavBar,
+    foot: Footer
   },
   data () {
     return {
-      sid: ''
+      sid: '',
     }
   },
   computed: {
+    report () {
+      return this.$store.getters.recommends['report'] ||
+            "<h2>请输入学号获取你的食堂消费报告!</h2>" + 
+            "<img src='http://oylyq3gv4.bkt.clouddn.com/chuyin.png' width=400px height=350px/>"
+    },
     breakfast () {
       return this.$store.getters.recommends['breakfast']
     },
@@ -89,6 +110,9 @@ export default {
     dinner () {
       return this.$store.getters.recommends['dinner']
     },
+    info () {
+      return this.$store.getters.recommends['info']
+    }
   },
   methods: {
     getRecommends () {

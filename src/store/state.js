@@ -220,6 +220,8 @@ const state = {
     breakfast: {head: '', recommends: [] },
     lunch: {head: '', recommends: [] },
     dinner: {head: '', recommends: [] },
+    report: "",
+    info: ""
   }
 }
 

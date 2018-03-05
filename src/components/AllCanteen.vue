@@ -45,10 +45,7 @@
       />
     </figure>
 
-    <footer>
-      <a href="//github.com/misakar">@misakar</a>|<a
-          href="http://www.wtfpl.net/">WTFPL License</a>|<a href="https://github.com/ccnu-et/front-end/">View on GitHub</a><br/>
-    </footer>
+    <foot></foot>
 
   </main>
 </template>
@@ -61,6 +58,7 @@ import 'echarts/lib/chart/bar'
 import 'echarts/lib/chart/scatter'
 import 'echarts/lib/chart/line'
 import NavBar from './NavBar'
+import Footer from './Footer'
 // theme
 import 'echarts/theme/dark'
 import theme from '../theme.json'
@@ -70,25 +68,33 @@ export default {
   name: 'AllCanteen',
   components: {
     chart: ECharts,
-    navbar: NavBar
+    navbar: NavBar,
+    foot: Footer
   },
   data () {
-    let dataLen = this.$store.getters.dataLen
     let options = 'svg'
-    let pie = this.$store.getters.pie
-    let line = this.$store.getters.line
-    let bar = this.$store.getters.bar
-    let scatter = this.$store.getters.scatter
     return {
-      dataLen,
       options,
-      pie,
-      line,
-      bar,
-      scatter,
       initOptions: {
         renderer: options.renderer || 'svg'
       }
+    }
+  },
+  computed: {
+    dataLen () {
+      return this.$store.getters.dataLen
+    },
+    pie () {
+      return this.$store.getters.pie
+    },
+    line () {
+      return this.$store.getters.line
+    },
+    bar () {
+      return this.$store.getters.bar
+    },
+    scatter () {
+      return this.$store.getters.scatter
     }
   },
   mounted () {
@@ -100,30 +106,27 @@ export default {
     let pieDataIndex = -1
     let pieDataLen = 10
 
-    // this.$store.dispatch('getDataLen')
+    this.$store.dispatch('getDataLen')
+    Bar.showLoading({
+      text: "数据实时处理中.."
+    })
+    // Bar.hideLoading() 
+    this.$store.dispatch('getBarData', Bar)
     Pie.showLoading({
       text: "数据实时处理中.."
     })
     this.$store.dispatch('getPieData', Pie)
     // Pie.hideLoading()
-
     Line.showLoading({
       text: "数据实时处理中.."
     })
     this.$store.dispatch('getLineData', Line)
     // Line.hideLoading()
-
     Scatter.showLoading({
       text: "数据实时处理中.."
     })
     this.$store.dispatch('getScatterData', Scatter)
     // Scatter.hideLoading()
-
-    Bar.showLoading({
-      text: "数据实时处理中.."
-    })
-    this.$store.dispatch('getBarData', Bar)
-    // Bar.hideLoading() 
 
     setInterval(() => {
       Pie.dispatchAction({

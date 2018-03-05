@@ -4,8 +4,8 @@
     <!-- modal默认不会出现, 需要点击事件触发 -->
     <navbar-modal name="test-modal">
       <div class="nav-button">
-        <button id="ccnu" v-on:click="to_ccnu">食堂数据分析</button>
-        <button id="stu" v-on:click="to_stu">个人窗口推荐</button>
+        <button id="ccnu" v-on:click="to_ccnu">全校数据分析</button>
+        <button id="stu" v-on:click="to_stu">个人数据分析</button>
       </div>
       <div class="logo">
         <img src="../assets/ccnulogo.png" width="180px" height="180px">
