@@ -1,6 +1,6 @@
 <template>
   <div class="nav">
-    <button id="show-modal" @click="show()">NavBar</button>
+    <button id="show-modal" @click="show()">切换</button>
     <!-- modal默认不会出现, 需要点击事件触发 -->
     <navbar-modal name="test-modal">
       <div class="nav-button">
@@ -45,9 +45,9 @@ export default {
 .v--modal-overlay .v--modal-box {
   position: relative;
   overflow: hidden;
-  box-sizing: border-box;
-  /*background-color: rgba(0,0,0,.8);*/
+  /* box-sizing: border-box; */
   background: transparent;
+  border: 0px;
 }
 
 .v--modal-overlay .v--modal-box .nav-button {
@@ -57,6 +57,10 @@ export default {
 .v--modal-overlay .v--modal-box .logo {
   margin-top: 100px;
   text-align: center;
+}
+
+button#show-modal {
+  font-size: 15px;
 }
 
 .v--modal-overlay .v--modal-box .nav-button button {

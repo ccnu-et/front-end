@@ -1,7 +1,7 @@
 <template>
   <main>
     <navbar></navbar>
-    <h1><a href="">华中师范大学食堂数据分析(test)</a></h1>
+    <h1><a href="">华中师范大学食堂数据分析</a></h1>
     <p class="desc">2017年2014, 2015, 2016级 {{ dataLen }} 条消费记录</p>
 
     <h2 id="pie"><a href="">华师各食堂消费占比<small>(2017年)</small></a></h2>

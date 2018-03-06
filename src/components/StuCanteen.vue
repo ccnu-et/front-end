@@ -2,13 +2,13 @@
   <div class="main">
   <navbar></navbar>
 
-  <h1><a href="">华中师范大学个人消费数据分析(test)</a></h1>
+  <h1><a href="">华中师范大学个人消费数据分析</a></h1>
     <sui-form>
       <sui-form-field>
         <input id="sid" v-model="sid" placeholder="请输入学号">
       </sui-form-field>
-      <button type="submit" @click.prevent="getRecommends"
-          style="font-size:15px;">查询</button>
+      <button id="query" type="submit" @click.prevent="getRecommends"
+          style="font-size:20px; padding:5px;">获取报告</button>
     </sui-form>
 
   <figure>
@@ -72,6 +72,7 @@
         </sui-card-content>
       </sui-card>
     </sui-card-group>
+    <br/>
   </figure>
 
     <foot></foot>
@@ -99,7 +100,7 @@ export default {
     report () {
       return this.$store.getters.recommends['report'] ||
             "<h2>请输入学号获取你的食堂消费报告!</h2>" + 
-            "<img src='http://oylyq3gv4.bkt.clouddn.com/chuyin.png' width=400px height=350px/>"
+            "<img src='http://oylyq3gv4.bkt.clouddn.com/chuyin.png' width=430px height=350px/>"
     },
     breakfast () {
       return this.$store.getters.recommends['breakfast']
@@ -127,9 +128,9 @@ export default {
 </script>
 
 <style>
-  .main {
-    height: 600px;
-    width: 800px;
-    margin: 0 auto;
-  }
+.main {
+  height: 600px;
+  width: 800px;
+  margin: 0 auto;
+}
 </style>
